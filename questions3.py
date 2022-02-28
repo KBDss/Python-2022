@@ -1,13 +1,13 @@
 #1
 lives = 3
 #2
-login = LittleN03
+login = "LittleN03"
 #3
-balance = 10000000000000000000000000000000000000000000000000000000000000000000000000000
+balance = 10000
 #4
-phone = 021234567
+phone = '0212345677'
 #5
-name = Josh
+name = 'Josh'
 #6
 age = 15
 #7
@@ -17,7 +17,9 @@ print(name)
 #9
 print(age)
 #10
-surname = Renton
+print(current_year)
 #11
+surname = 'Renton'
+#12
 
 
