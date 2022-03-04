@@ -20,3 +20,12 @@ user_noun = input("Type an noun")
 user_verb = input("Type an verb")
 #11
 print(f"Cool, I also like {user_movie} and {user_book}") 
+#11 
+print(f"Wow, {user_movie} sucks, you have a terrible taste in books aswell") 
+#11
+print(f"{user_age} doesnt exist what are you talking about, your {user_noun}")
+#12
+user_age_int = int(input("what is your age again"))
+#13
+print(f"you will be {user_age_int + 10} in ten years") 
+#14
