@@ -36,11 +36,11 @@ if user_director == "mel gibson":
 	print("correct")
 else:
 	print("wrong")
-"""
+
 
 score = 0
 question1 = input("What is the strongest tower in btd6\n").lower() 
-if question1 == "super monkey":
+if question1 == "super monkey" or question1 == "bomb shooter":
 	print("correct")
 	score = score + 1
 else:
@@ -61,7 +61,7 @@ else:
 	print("smh not a real one")
 
 question4 = input("how many hours does Hamish have in gmod\n").lower()
-if question4 == "1000":
+if question4 == "1000" or question4 == "900":
 	print("corect")
 	score = score + 1
 else:
@@ -75,6 +75,7 @@ else:
 	print("no")
 
 print(f"score = {score}/5") 
+"""
 
 
 
