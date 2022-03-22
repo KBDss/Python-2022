@@ -3,7 +3,7 @@
 #####################
 from adventurelib import *
 
-
+Room.items = Bag()
 #####################
 #DEFINE ROOMS
 #####################
@@ -24,11 +24,11 @@ mansion = Room("WOAH, the Orekhovskaya gang underground mansion, its huge")
 #DEFINE ITEMS
 #####################
 Item.description = ""
-Bottle of vodka = Item("vodka", "bottle of vodka")
-Bottle of vodka.description = "Bottle of vodka, increases happiness when consumed"
+Bottle_of_vodka = Item("vodka", "bottle of vodka")
+Bottle_of_vodka.description = "Bottle of vodka, increases happiness when consumed, needed to give to the hobo in the alley"
 
-Baseball bat = Item("bat", "baseball bat")
-Baseball bat.description = "A baseball bat, could do some serious damage to those pesky gang members"
+Baseball_bat = Item("bat", "baseball bat")
+Baseball_bat.description = "A baseball bat, could do some serious damage to those pesky gang members"
 
 key = Item("key", "door key")
 key.description = "A key for your apartment, will be needed to leave"
@@ -36,11 +36,14 @@ key.description = "A key for your apartment, will be needed to leave"
 M82A3 = Item("gun", "M82A3", "sniper", "sniper rifle")
 M82A3.description = "A M82A3. This thing could destory anything... especially gang members"
 
-
+kitchen.items.add(Bottle_of_vodka)
+bedroom.items.add(M82A3) 
+bedroom.items.add(key)
+hallway.items.add(Baseball_bat)
 #####################
 #DEFINE BAGS
 #####################
-
+player_inv = Bag()
 
 #####################
 #ADD ITEMS TO BAGS
