@@ -15,10 +15,17 @@ street = Room("A run down street, Theres an dimmly lit alley.")
 alley = Room("An alleyway, you can see something at the end of it")
 hideout = Room("Finally the Orekhovskaya gang hideout, it appears to be larger than it initally seemed")
 mansion = Room("WOAH, the Orekhovskaya gang underground mansion, its huge")
+
 #####################
 #DEFINE CONNECTIONS
 #####################
-
+bedroom.east = kitchen
+kitchen.north = hallway
+hallway.east = lobby
+lobby.north = street
+street.north = alley
+alley.west = hideout
+hideout.north = mansion
 
 #####################
 #DEFINE ITEMS
@@ -53,12 +60,42 @@ player_inv = Bag()
 #####################
 #DEFINE ANY VARIABLES
 #####################
+current_room = bedroom
 
 
 #####################
 #BINDS(eg '@when("look'))
 #####################
+@when("look")
+def look():
+	print(current_room)
+	print(f"There are exits to the ",current_room.exits())
+	if len(current_room.items) > 0:
+		print("You also see:")
+		for item in current_room.items:
+			print(item)
 
+@when("jump")
+def jump():
+	print("You jump")
+
+@when("inventory")
+def check_inventory():
+	print("You are carrying")
+	for item in inventory:
+		print(item)
+
+
+@when("go DIRECTION")
+@when("travel DIRECTION")
+def travel(direction):
+	global current_room
+	if direction in current_room.exits():
+		current_room = current_room.exit(direction)
+		print(f"You go {direction}")
+		print(current_room)
+	else:
+		print("You can't go that way")
 
 #####################
 #MAIN FUNCTION
