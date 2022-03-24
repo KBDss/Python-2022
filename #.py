@@ -10,7 +10,7 @@ Room.items = Bag()
 bedroom = Room("This is your groggy bedroom, the walls are lined with grease.")
 kitchen = Room("This is your kitchen... if you can call it that. There is a exit here to leave your apartment.")
 hallway = Room("This is the hallway of the apartment complex. Theres an elevator to the lobby")
-lobby = Room("Here is the brightly lit welcoming lobby, an exit to outside is available.")
+lobby = Room("Here is the brightly lit welcoming lobby, an exit outside is available north, there is also a receptionist to the east.")
 street = Room("A run down street, Theres an dimmly lit alley.")
 alley = Room("An alleyway, you can see something at the end of it")
 hideout = Room("Finally the Orekhovskaya gang hideout, it appears to be larger than it initally seemed")
@@ -20,7 +20,7 @@ mansion = Room("WOAH, the Orekhovskaya gang underground mansion, its huge")
 #DEFINE CONNECTIONS
 #####################
 bedroom.east = kitchen
-kitchen.north = hallway
+#kitchen.north = hallway - will add later because it starts locked
 hallway.east = lobby
 lobby.north = street
 street.north = alley
@@ -61,6 +61,7 @@ player_inv = Bag()
 #DEFINE ANY VARIABLES
 #####################
 current_room = bedroom
+used_key = False 
 
 
 #####################
@@ -96,6 +97,18 @@ def travel(direction):
 		print(current_room)
 	else:
 		print("You can't go that way")
+
+
+@when("use ITEM")
+def use(item):
+	if item == key and current_room == kitchen:
+		print("You used the key and unlock your front door")
+		print("The door is open to the north")
+		used_key = True 
+		kitchen.north=hallway
+	else
+		print("You cant use that here")
+
 
 #####################
 #MAIN FUNCTION
