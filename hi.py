@@ -67,6 +67,8 @@ used_key = False
 #####################
 #BINDS(eg '@when("look'))
 #####################
+
+
 @when("look")
 def look():
 	print(current_room)
@@ -76,15 +78,30 @@ def look():
 		for item in current_room.items:
 			print(item)
 
+
 @when("jump")
 def jump():
 	print("You jump")
 
+
 @when("inventory")
-def check_inventory():
+@when("show inventory")
+def player_inventory():
 	print("You are carrying")
 	for item in inventory:
 		print(item)
+
+
+@when("get ITEM")
+@when("take ITEM")
+@when("pick up ITEM")
+def pickup(item)
+	if item in current_room.items:
+		t = current_room.items.take(item)
+		inventory.add(t)
+		print(f"You pick up the {item}")
+	else:
+		print(f"You don't see a {item}")
 
 
 @when("go DIRECTION")
@@ -106,15 +123,25 @@ def use(item):
 		print("The door is open to the north")
 		used_key = True 
 		kitchen.north=hallway
-	else
+	else:
 		print("You cant use that here")
+
+
+@when("look at ITEM")
+def look_at(item):
+	if item in inventory:
+		t = inventory.find(item)
+		print(t.description)
+	else:
+		print(f"You aren't carrying a {item}")
 
 
 #####################
 #MAIN FUNCTION
 #####################
-def main():
-	start()
 
-if __name__ == '__main__':
-	main()
+def main():
+	print(current_room)
+	start()
+	
+main()
