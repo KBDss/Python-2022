@@ -93,9 +93,9 @@ def get_item(item):
 	if item in current_room.items:
 		t - current_room.items.take(item)
 		inventory.add(t)
-		print("You pick up the {item}")
+		print(f"You pick up the {item}")
 	else:
-		print("You dont see a {item}")
+		print(f"You dont see a {item}")
 
 
 @when("inventory")
@@ -123,7 +123,7 @@ def use(item):
 		print("You used the keycard and the escape pod slides open")
 		print("The escape pod stands open to the south")
 		used_keycard = True 
-		brid:ge.south = escape 
+		bridge.south = escape 
 	else:
 		print("You cant use that here")
 
