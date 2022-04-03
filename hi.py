@@ -12,7 +12,7 @@ kitchen = Room("This is your kitchen... if you can call it that. There is a exit
 hallway = Room("This is the hallway of the apartment complex. Theres an elevator to the lobby")
 lobby = Room("Here is the brightly lit welcoming lobby, an exit outside is available north, there is also a receptionist to the east.")
 street = Room("A run down street, Theres an dimmly lit alley.")
-alley = Room("An alleyway littered with a sleeping hobo")
+alley = Room("An alleyway littered with a sleeping hobo, to get past you must have vodka. Type 'hobo' to interact")
 hideout = Room("Finally the Orekhovskaya gang hideout, it appears to be larger than it initally seemed")
 mansion = Room("WOAH, the Orekhovskaya gang underground mansion, its huge")
 
@@ -96,6 +96,7 @@ def player_inventory():
 @when("get ITEM")
 @when("take ITEM")
 @when("pick up ITEM")
+@when("grab ITEM")
 def pickup(item):
 	if item in current_room.items:
 		t = current_room.items.take(item)
@@ -139,9 +140,11 @@ def look_at(item):
 
 @when("hobo")
 def hobo():
-	if item in player_inv and current_room == alley and item == "vodka":
+	if "vodka" in player_inv and current_room == alley:
 		print("You disrupt the hobo from his slumber, he demands vodka for you to pass. Luckily you grabbed that vodka from your kitchen. He takes it and now you are free to pass")
 		alley.west = hideout
+	elif current_room == alley:
+		print("You wake up the hobo but he seems angry, you have no vodka for him. Go back to your apartment and grab the vodka from the kitchen.")
 	else:
 		print("There is no hobo in this room.")
 
