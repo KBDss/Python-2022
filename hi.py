@@ -10,7 +10,7 @@ Room.items = Bag()
 bedroom = Room("This is your groggy bedroom, the walls are lined with grease.")
 kitchen = Room("This is your kitchen... if you can call it that. There is a exit here to leave your apartment.")
 hallway = Room("This is the hallway of the apartment complex. Theres an elevator to the lobby")
-lobby = Room("Here is the brightly lit welcoming lobby, an exit outside is available north, there is also a receptionist to the east.")
+lobby = Room("Here is the brightly lit welcoming lobby, an exit outside is available north, there is also a receptionist. Type 'staff' to interact")
 street = Room("A run down street, Theres an dimmly lit alley.")
 alley = Room("An alleyway littered with a sleeping hobo, to get past you must have vodka. Type 'hobo' to interact")
 hideout = Room("Finally the Orekhovskaya gang hideout, it appears to be larger than it initally seemed")
@@ -144,9 +144,18 @@ def hobo():
 		print("You disrupt the hobo from his slumber, he demands vodka for you to pass. Luckily you grabbed that vodka from your kitchen. He takes it and now you are free to pass")
 		alley.west = hideout
 	elif current_room == alley:
-		print("You wake up the hobo but he seems angry, you have no vodka for him. Go back to your apartment and grab the vodka from the kitchen.")
+		print("You wake the hobo but he seems angry, you have no vodka for him. Go back to your apartment and grab the vodka from the kitchen.")
 	else:
 		print("There is no hobo in this room.")
+
+@when("staff")
+def staff():
+	if current_room == lobby:
+		print("Hello there Alekseyevich, I must warn you before you leave, you must be careful out there. The Orekhovskaya gang are ruthless recently. As your receptionist 'Alexander Solonik' i must warn you of these things.")
+		print("'Thank you' you reply")
+
+	else:
+		print("There is no staff in this room")
 
 
 #####################
