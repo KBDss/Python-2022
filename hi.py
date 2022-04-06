@@ -11,7 +11,7 @@ bedroom = Room("This is your groggy bedroom, the walls are lined with grease.")
 kitchen = Room("This is your kitchen... if you can call it that. There is a exit here to leave your apartment.")
 hallway = Room("This is the hallway of the apartment complex. Theres an elevator to the lobby")
 lobby = Room("Here is the brightly lit welcoming lobby, an exit outside is available north, there is also a receptionist. Type 'staff' to interact")
-street = Room("A run down street, Theres an dimmly lit alley.")
+street = Room("A run down street, There is a broken down car on the side of the road. Theres an dimmly lit alley. Type 'car' to interact")
 alley = Room("An alleyway littered with a sleeping hobo, to get past you must have vodka. Type 'hobo' to interact")
 hideout = Room("Finally the Orekhovskaya gang hideout, it appears to be larger than it initally seemed")
 mansion = Room("WOAH, the Orekhovskaya gang underground mansion, its huge")
@@ -43,10 +43,14 @@ key.description = "A key for your apartment, will be needed to leave"
 M82A3 = Item("gun", "M82A3", "sniper", "sniper rifle")
 M82A3.description = "A M82A3. This thing could destory anything... especially gang members"
 
+mao_bar = Item("mao bar", "bar")
+mao_bar.description = "A mao bar, in the ingredients list there are countless amounts of illcit substances. Could be deadly"
+
 kitchen.items.add(Bottle_of_vodka)
 bedroom.items.add(M82A3) 
 bedroom.items.add(key)
 hallway.items.add(Baseball_bat)
+#street.items.add(mao_bar) - Will add later when car bind is used
 #####################
 #DEFINE BAGS
 #####################
@@ -62,6 +66,7 @@ player_inv = Bag()
 #####################
 current_room = bedroom
 used_key = False 
+used_vodka = False
 
 
 #####################
@@ -121,11 +126,15 @@ def travel(direction):
 
 @when("use ITEM")
 def use(item):
-	if item in player_inv and item == "key" and current_room == kitchen:
+	if item in player_inv and item == key and current_room == kitchen:
 		print("You used the key and unlock your front door")
 		print("The door is open to the north")
 		used_key = True 
-		kitchen.north = hallway
+		kitchen.north = hallway 
+	elif item == mao_bar:
+		print("You eat the mao bar and see the copious amounts of lean and other substances in it. You slowly start to feel your insides burning.")
+		print("You DIE")
+		quit()
 	else:
 		print("You cant use that here")
 
@@ -143,8 +152,9 @@ def hobo():
 	if "vodka" in player_inv and current_room == alley:
 		print("You disrupt the hobo from his slumber, he demands vodka for you to pass. Luckily you grabbed that vodka from your kitchen. He takes it and now you are free to pass")
 		alley.west = hideout
+		used_vodka = True
 	elif current_room == alley:
-		print("You wake the hobo but he seems angry, you have no vodka for him. Go back to your apartment and grab the vodka from the kitchen.")
+		print("You wake the hobo but he seems angry, you have no vodka for him. Go back to your apartment and grab some vodka from the kitchen.")
 	else:
 		print("There is no hobo in this room.")
 
@@ -156,6 +166,16 @@ def staff():
 
 	else:
 		print("There is no staff in this room")
+
+@when("car")
+def car():
+	if "bat" in player_inv and current_room == street:
+		print("You use your bat to smash the car window open and see a food item. It says 'Mao bar'")
+		street.items.add(mao_bar)
+	elif current_room == street:
+		print("You look into the car and see a food bar of some sort, you need a bat to smash open the window.")
+	else:
+		print("There is no car here")
 
 
 #####################
