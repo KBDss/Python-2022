@@ -46,7 +46,6 @@ M82A3.description = "A M82A3. This thing could destory anything... especially ga
 maobar = Item("mao bar", "bar", "maobar")
 maobar.description = "A mao bar, in the ingredients list there are countless amounts of illcit substances. Could be deadly"
 
-kitchen.items.add(Bottle_of_vodka)
 bedroom.items.add(M82A3) 
 bedroom.items.add(key)
 hallway.items.add(Baseball_bat)
@@ -149,12 +148,12 @@ def use(item):
 		else:
 			print("You do not drink the vodka")
 
-	elif item == 'computer'
+	elif item == 'computer':
 		print("You boot up the old computer")
-		option = input("What do you want to do? You can: browse the internet, play games")
+		option = input("What do you want to do? You can: browse the internet, play games\n")
 		if option == 'browse the internet':
 			print("You wait 20 seconds for internet explorer to open.")
-			option = input("what do you want to search? You can: buy vodka, browse weddit")
+			option = input("what do you want to search? You can: buy vodka, browse weddit\n")
 			if option == "buy vodka":
 				print("You open 'cheapvodka4u' and buy some vodka, it will be delivered outside your apartment door.")
 				hallway.items.add(Bottle_of_vodka)
@@ -164,7 +163,7 @@ def use(item):
 			else:
 				print("that is not a valid search")
 		elif option == 'play games':
-			print("You play games")
+			print("You play some tribes ascend")
 
 
 
