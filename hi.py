@@ -14,7 +14,7 @@ lobby = Room("Here is the brightly lit welcoming lobby. A comfortable couch sits
 street = Room("A run down street, There is a broken down car on the side of the road. Theres an dimmly lit alley. Type 'search car' to interact")
 alley = Room("An alleyway littered with a sleeping hobo. Type 'talk to hobo' to interact")
 hideout = Room("A huge alpha male stands at the door to the Orekhovskaya gang underground mansion. You must tell him a password to enter. Type 'talk to alpha' to interact")
-mansion_lobby = Room("WOAH, the Orekhovskaya gang underground mansion, its huge")
+mansion_lobby = Room("WOAH, the Orekhovskaya gang underground mansion, its huge. As you swing open the front doors you realize a group of armed men in black suits have been waiting for you.")
 
 #####################
 #DEFINE CONNECTIONS
@@ -58,7 +58,18 @@ player_inv = Bag()
 #####################
 #ADD ITEMS TO BAGS
 #####################
-
+@when("get ITEM")
+@when("take ITEM")
+@when("pick up ITEM")
+@when("grab ITEM")
+def pickup(item):
+	if item in current_room.items:
+		t = current_room.items.take(item)
+		player_inv.add(t)
+		print(f"You pick up the {item}")
+		print(t.description)
+	else:
+		print(f"You don't see a {item}")
 
 #####################
 #DEFINE ANY VARIABLES
@@ -101,28 +112,27 @@ def player_inventory():
 		print(item)
 
 
-@when("get ITEM")
-@when("take ITEM")
-@when("pick up ITEM")
-@when("grab ITEM")
-def pickup(item):
-	if item in current_room.items:
-		t = current_room.items.take(item)
-		player_inv.add(t)
-		print(f"You pick up the {item}")
-		print(t.description)
-	else:
-		print(f"You don't see a {item}")
 
 
 @when("go DIRECTION")
 @when("travel DIRECTION")
+@when("n", direction="north")
+@when("s", direction="south")
+@when("e", direction="east")
+@when("w", direction="west")
 def travel(direction):
 	global current_room
-	if direction in current_room.exits():
-		current_room = current_room.exit(direction)
-		print(f"You go {direction}")
-		print(current_room)
+	room = current_room.exit(direction)
+	if room:
+		if room == mansion_lobby:
+			print(room)
+			print("The armed men gun you down until there is nothing left of you ")
+			print("You DIE")
+			quit()
+		else:
+			current_room=room
+			print(f"You go {direction}")
+			print(current_room)
 	else:
 		print("You can't go that way")
 
@@ -191,7 +201,7 @@ def look_at(item):
 @when("talk to alpha")
 @when("alpha")
 def alpha():
-	option = input("The alpha stands at the door towering over you, he demands a password to pass.")
+	option = input("The alpha stands at the door towering over you, he demands a password to pass.\n")
 	if option == 'shipin is best':
 		print("he responds 'Correct, you are free to pass' while giving an uncertain look.")
 	else:
