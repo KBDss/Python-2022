@@ -50,6 +50,7 @@ bedroom.items.add(M82A3)
 bedroom.items.add(key)
 hallway.items.add(Baseball_bat)
 #street.items.add(mao_bar) - Will add later when car bind is used
+kitchen.items.add(Bottle_of_vodka)
 #####################
 #DEFINE BAGS
 #####################
@@ -201,13 +202,16 @@ def look_at(item):
 @when("talk to alpha")
 @when("alpha")
 def alpha():
-	option = input("The alpha stands at the door towering over you, he demands a password to pass.\n")
-	if option == 'shipin is best':
-		print("he responds 'Correct, you are free to pass' while giving an uncertain look.")
+	if current_room == hideout:
+		option = input("The alpha stands at the door towering over you, he demands a password to pass.\n")
+		if option == 'shipin is best':
+			print("he responds 'Correct, you are free to pass' while giving an uncertain look.")
+		else:
+			print("He responds 'wrong' and stomps on you")
+			print("You DIE")
+			quit()
 	else:
-		print("He responds 'wrong' and stomps on you")
-		print("You DIE")
-		quit()
+		print("There is no Alpha male here.")
 
 
 @when("search couch")
