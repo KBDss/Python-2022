@@ -213,7 +213,10 @@ def alpha():
 @when("search couch")
 @when("couch")
 def couch():
-	print("You search the couch and find a thin stripe of paper that says 'Pass: shipin is best'.")
+	if current_room == lobby:
+		print("You search the couch and find a thin stripe of paper that says 'Pass: shipin is best'.")
+	else:
+		print("There is no couch here")
 
 @when("talk to hobo")
 @when("hobo")
