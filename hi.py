@@ -145,7 +145,7 @@ def use(item):
 		used_key = True 
 		kitchen.north = hallway 
 		player_inv.take("key")
-	elif item == "maobar" or item == "mao bar" or item == "bar":
+	elif item in player_inv and item == "maobar" or item == "mao bar" or item == "bar":
 		print("You eat the mao bar and see the copious amounts of lean and other substances in it. You slowly start to feel your insides burning.")
 		print("You DIE")
 		quit()
@@ -241,13 +241,16 @@ def staff():
 @when("search car")
 @when("car")
 def car():
-	if "bat" in player_inv and current_room == street:
-		print("You use your bat to smash the car window open and see a food item. It says 'maobar'")
-		street.items.add(maobar)
-	elif current_room == street:
-		print("You look into the car and see a food bar of some sort, you need a bat to smash open the window.")
+	if current_room == street:
+		if "bat" in player_inv and current_room == street:
+			print("You use your bat to smash the car window open and see a food item. It says 'maobar'")
+			street.items.add(maobar)
+		elif current_room == street:
+			print("You look into the car and see a food bar of some sort, you need a bat to smash open the window.")
+		else:
+			print("There is no car here")
 	else:
-		print("There is no car here")
+		print("There is no car here.")
 
 
 #####################
